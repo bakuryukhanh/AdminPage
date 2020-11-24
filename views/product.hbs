@@ -1,0 +1,86 @@
+{{#extend "bodyid"}}
+page-top
+{{/extend}}
+{{>navbar}}
+
+<div id="wrapper">
+    <!-- Sidebar -->
+    {{> sidebarAdmin}}
+
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Tables</li>
+            </ol>
+
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Data Table Example
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Type</th>
+                                    <th>Hot</th>
+                                    <th>New</th>
+                                    <th>Edit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each products}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{price}}</td>
+                                    <td>{{type}}</td>
+                                    <td>{{isHot}}</td>
+                                    <td>{{New}}</td>
+                                    <td style="text-align: center"><a href="/discount/edit/{{code}}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="/discount/remove/{{code}}">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+                <a href="/discount/add" class="btn btn-primary" role="button" aria-pressed="true"
+                    style="margin: 10px auto">Add
+                    Discount</a>
+                <div class="card-footer small text-muted">
+                    Updated yesterday at 11:59 PM
+                </div>
+            </div>
+
+            <p class="small text-center text-muted my-5">
+                <em>More table examples coming soon...</em>
+            </p>
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Your Website 2018</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- /.content-wrapper -->
+</div>
