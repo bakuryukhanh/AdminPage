@@ -25,30 +25,28 @@ page-top
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="1">
                             <thead>
                                 <tr>
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Type</th>
-                                    <th>Hot</th>
-                                    <th>New</th>
+                                    <th>More</th>
                                     <th>Edit</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {{#each products}}
                                 <tr>
-                                    <td>{{name}}</td>
-                                    <td>{{price}}</td>
-                                    <td>{{type}}</td>
-                                    <td>{{isHot}}</td>
-                                    <td>{{New}}</td>
-                                    <td style="text-align: center"><a href="/discount/edit/{{code}}">
+                                    <td class="name">{{name}}</td>
+                                    <td class="price">{{price}}</td>
+                                    <td class="type">{{type}}</td>
+                                    <td class="more">{{more}}</td>
+                                    <td style="text-align: center"><a href="/product/edit/{{_id}}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="/discount/remove/{{code}}">
-                                            <i class="fas fa-trash-alt"></i>
+                                        <a href="/product/remove/{{_id}}" name="remove-icon">
+                                            <i class="fas fa-trash-alt" id="{{_id}}"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -59,9 +57,9 @@ page-top
                         </table>
                     </div>
                 </div>
-                <a href="/discount/add" class="btn btn-primary" role="button" aria-pressed="true"
+                <a href="/product/add" class="btn btn-primary" role="button" aria-pressed="true"
                     style="margin: 10px auto">Add
-                    Discount</a>
+                    Product</a>
                 <div class="card-footer small text-muted">
                     Updated yesterday at 11:59 PM
                 </div>
@@ -72,7 +70,7 @@ page-top
             </p>
         </div>
         <!-- /.container-fluid -->
-
+        <div id="dialog"></div>
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
             <div class="container my-auto">
@@ -84,3 +82,6 @@ page-top
     </div>
     <!-- /.content-wrapper -->
 </div>
+{{#extend "script"}}
+<script src="/js/product-remove.js"></script>
+{{/extend}}

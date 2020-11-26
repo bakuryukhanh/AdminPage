@@ -1,0 +1,75 @@
+{{>navbar}}
+<div id="wrapper">
+    {{>sidebarAdmin}}
+    <div class="container-fluid">
+        <h1>Edit Product</h1>
+        <form data-toggle="validator" role="form" id="product-detail-form">
+            <div class="form-group">
+                <label for="name" class="control-label">Name</label>
+                <input type="text" class="form-control" id="name" value="{{product.name}}" required>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label for="price" class="control-label">Price</label>
+                <input type="number" step=0.001 class="form-control" id="price" value={{product.price}} required>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <label for="imgSrc" class="control-label">Image Source</label>
+                <input type="url" class="form-control" id="imgSrc" value="{{product.imgSrc}}" required>
+                <div class=" help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="type" value="coffee" checked required>
+                        Coffee
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="type" value="milk-tea" required>
+                        Milk Tea
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="type" value="tea" required>
+                        Tea
+                    </label>
+                </div>
+                <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group">
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="more" value="hot">
+                        Hot
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
+                        <input type="radio" name="more" value="new">
+                        New
+                    </label>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+        </form>
+        <div id="dialog"></div>
+        <div id="msgSubmit"></div>
+    </div>
+    <footer class="sticky-footer">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright © Your Website 2018</span>
+            </div>
+        </div>
+    </footer>
+</div>
+{{>logout}}
+{{>scrolltotop}}
+{{#extend "script"}}
+<script src="/js/productDetail-form.js"></script>
+{{/extend}}

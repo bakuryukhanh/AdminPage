@@ -1,4 +1,4 @@
-const {mongoose} = require("./mongoose")
+const { mongoose } = require("./mongoose");
 const discountSchema = new mongoose.Schema({
     name: String,
     code: {
