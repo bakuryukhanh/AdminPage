@@ -17,18 +17,20 @@
                 </div>
                 <div class="form-group col-12">
                     <label for="value" class="control-label">value</label>
-                    <input type="text" class="form-control" id="value" value="{{discount.value}}" required>
+                    <input type="number" class="form-control" id="value" value="{{discount.value}}" required>
                     <div class="help-block with-errors"></div>
                 </div>
 
                 <div class="form-group col-12">
                     <label for="startDate" class="control-label">Start Date</label>
-                    <input type="text" class="form-control" id="startDate" value="{{discount.startDate}}" required>
+                    <input type="text" data-dateValid class="form-control" id="startDate" value="{{discount.startDate}}"
+                        required>
                     <div class=" help-block with-errors"></div>
                 </div>
                 <div class="form-group col-12">
                     <label for="endDate" class="control-label">endDate</label>
-                    <input type="text" class="form-control" id="endDate" value="{{discount.endDate}}" required>
+                    <input type="text" data-dateValid class="form-control" id="endDate" value="{{discount.endDate}}"
+                        required>
                     <div class="help-block with-errors"></div>
                 </div>
 
