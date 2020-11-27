@@ -39,16 +39,16 @@ page-top
                             <tbody>
                                 {{#each discounts}}
                                 <tr>
-                                    <td>{{name}}</td>
+                                    <td class="name">{{name}}</td>
                                     <td>{{code}}</td>
                                     <td>{{value}}</td>
                                     <td>{{startDate}}</td>
                                     <td>{{endDate}}</td>
-                                    <td style="text-align: center"><a href="/discount/edit/{{code}}">
+                                    <td style="text-align: center"><a href="/discount/edit/{{_id}}">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="/discount/remove/{{code}}">
-                                            <i class="fas fa-trash-alt"></i>
+                                        <a href="/discount/remove/{{_id}}" name="remove-icon">
+                                            <i class="fas fa-trash-alt" id="{{_id}}"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -66,6 +66,7 @@ page-top
                     Updated yesterday at 11:59 PM
                 </div>
             </div>
+            <div id="dialog"></div>
 
             <p class="small text-center text-muted my-5">
                 <em>More table examples coming soon...</em>
@@ -84,3 +85,6 @@ page-top
     </div>
     <!-- /.content-wrapper -->
 </div>
+{{#extend "script"}}
+<script src="/js/discount-remove.js"></script>
+{{/extend}}

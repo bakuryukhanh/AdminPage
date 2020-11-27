@@ -11,10 +11,8 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.addProduct = async (req, res, next) => {
     const product = await new ProductModel(req.body);
-    product
-        .save()
-        .then(res.json({ log: "success" }))
-        .catch((err) => console.error(err));
+    await product.save().catch((err) => console.error(err));
+    res.json({ log: "success" });
 };
 
 exports.getedit = async (req, res, next) => {

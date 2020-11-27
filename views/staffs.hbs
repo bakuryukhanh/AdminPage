@@ -34,6 +34,7 @@ page-top
                                     <th>Age</th>
                                     <th>Start date</th>
                                     <th>Salary</th>
+                                    <th>Edit</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -44,23 +45,34 @@ page-top
                                     <th>Age</th>
                                     <th>Start date</th>
                                     <th>Salary</th>
+                                    <th>Edit</th>
                                 </tr>
                             </tfoot>
                             <tbody>
                                 {{#each staff}}
                                 <tr>
-                                    <td>{{name}}</td>
+                                    <td class="name">{{name}}</td>
                                     <td>{{role}}</td>
                                     <td>{{address}}</td>
                                     <td>{{age}}</td>
                                     <td>{{startDate}}</td>
-                                    <td>${{salary}}</td>
+                                    <td>{{salary}}</td>
+                                    <td style="text-align: center"><a href="/staff/edit/{{_id}}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="/staff/remove/{{_id}}" name="remove-icon">
+                                            <i class="fas fa-trash-alt" id="{{_id}}"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 {{/each}}
                             </tbody>
                         </table>
                     </div>
                 </div>
+                <a href="/staff/add" class="btn btn-primary" role="button" aria-pressed="true"
+                    style="margin: 10px auto">Add
+                    staff</a>
                 <div class="card-footer small text-muted">
                     Updated yesterday at 11:59 PM
                 </div>
@@ -71,7 +83,7 @@ page-top
             </p>
         </div>
         <!-- /.container-fluid -->
-
+        <div id="dialog"></div>
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
             <div class="container my-auto">
@@ -83,3 +95,6 @@ page-top
     </div>
     <!-- /.content-wrapper -->
 </div>
+{{#extend "script"}}
+<script src="/js/staff-remove.js"></script>
+{{/extend}}

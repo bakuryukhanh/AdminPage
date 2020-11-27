@@ -31,6 +31,11 @@ hbs.registerHelper("block", function (name) {
     blocks[name] = [];
     return val;
 });
+hbs.registerHelper("checked", function (value1, value2) {
+    if (value1 == null) return "";
+    if (value1 == value2) return "checked";
+    return "";
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

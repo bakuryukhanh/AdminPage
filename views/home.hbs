@@ -84,6 +84,7 @@ page-top
                   <th>Age</th>
                   <th>Start date</th>
                   <th>Salary</th>
+                  <th>Edit</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,6 +96,13 @@ page-top
                   <td>{{age}}</td>
                   <td>{{startDate}}</td>
                   <td>${{salary}}</td>
+                  <td style="text-align: center"><a href="/staff/edit/{{_id}}">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/staff/remove/{{_id}}" name="remove-icon">
+                      <i class="fas fa-trash-alt" id="{{_id}}"></i>
+                    </a>
+                  </td>
                 </tr>
                 {{/each}}
               </tbody>
