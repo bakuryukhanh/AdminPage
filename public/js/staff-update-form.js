@@ -1,4 +1,4 @@
-$("#product-detail-form")
+$("#staff-update-form")
     .validator()
     .on("submit", function (event) {
         if (event.isDefaultPrevented()) {
@@ -14,20 +14,26 @@ $("#product-detail-form")
 
 function submitForm() {
     // Initiate Variables With Form Content
+    var username = $("#username").val();
+    var password = $("#password").val();
     var name = $("#name").val();
-    var price = $("#price").val();
-    var imgSrc = $("#imgSrc").val();
-    var type = $("[name='type']:checked").val();
-    var more = $("[name='more']:checked").val();
-    var description = $("#description").val();
-    var formula = $("#formula").val();
+    var address = $("#address").val();
+    var phoneNumber = $("#phoneNumber").val();
+    var birthday = $("#birthday").val();
 
-    var data = { name, price, imgSrc, type, more, description, formula };
-    console.log(data);
-    //Submit form
+    var staff = {
+        username,
+        password,
+        name,
+        address,
+        phoneNumber,
+        birthday,
+    };
+    console.log(staff);
+    // //Submit form
     fetch("", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(staff),
         headers: {
             "content-type": "application/json",
         },
@@ -54,18 +60,38 @@ function submitForm() {
 
         </div>
       </div>`;
+            } else {
+                var dialog = $("#dialog")[0];
+                dialog.innerHTML = `<div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <p>${Object.keys(res.keyPattern)} is not valid</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>`;
             }
         })
         .then(() => $("#myModal").modal("show"));
 }
 
 function formSuccess() {
-    $("#product-detail-form")[0].reset();
+    $("#staff-update-form")[0].reset();
     submitMSG(true, "Message Submitted!");
 }
 
 function formError() {
-    $("#product-detail-form")
+    $("#staff-update-form")
         .removeClass()
         .addClass("shake animated")
         .one(

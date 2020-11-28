@@ -1,0 +1,53 @@
+{{>navbar}}
+<div id="wrapper">
+    {{>sidebarStaff}}
+    <div class="container-fluid">
+        <h1>Staff Detail</h1>
+        <form data-toggle="validator" role="form" id="staff-update-form">
+            <div class="row">
+                <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <label for="username" class="control-label">username</label>
+                    <input type="text" class="form-control" id="username" value="{{user.username}}" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <label for="password" class="control-label">password</label>
+                    <input type="text" class="form-control" id="password" value="{{user.password}}" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="name" class="control-label">Name</label>
+                    <input type="text" class="form-control" id="name" value="{{user.name}}" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group col-12">
+                    <label for="phoneNumber" class="control-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" value="{{user.phoneNumber}}" required>
+                    <div class=" help-block with-errors"></div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="address" class="control-label">address</label>
+                    <input type="text" class="form-control" id="address" value="{{user.address}}" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-xl-12">
+                    <label for=" birthday" class="control-label">Birthday</label>
+                    <input type="text" data-dateValid class="form-control" id="birthday" value="{{user.birthday}}"
+                        required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin:10px auto">Submit</button>
+            </div>
+
+        </form>
+
+        <div id="dialog"></div>
+        <div id="msgSubmit"></div>
+    </div>
+</div>
+{{>logout}}
+{{>scrolltotop}}
+{{#extend "script"}}
+<script src="/js/staff-update-form.js"></script>
+{{/extend}}

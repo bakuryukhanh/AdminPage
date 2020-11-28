@@ -8,5 +8,8 @@ exports.index = async (req, res, next) => {
         });
         return staffs;
     });
-    res.render("home", { staff: staffs });
+    res.render("pages/admin/home", {
+        staff: staffs,
+        page: "dashboard",
+    });
 };

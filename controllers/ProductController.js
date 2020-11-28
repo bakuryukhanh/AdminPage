@@ -3,10 +3,10 @@ const { ProductModel } = require("../models/productModel");
 const { ObjectID } = require("mongodb");
 exports.index = async (req, res, next) => {
     const products = await ProductModel.find({});
-    res.render("product", { products: products });
+    res.render("pages/admin/product", { products: products, page: "product" });
 };
 exports.getAddProduct = (req, res, next) => {
-    res.render("productDetail");
+    res.render("pages/admin/productDetail");
 };
 
 exports.addProduct = async (req, res, next) => {
@@ -20,7 +20,10 @@ exports.getedit = async (req, res, next) => {
     const product = await ProductModel.findOne({
         _id: ObjectID(req.params.id),
     });
-    res.render("productDetail", { product: product });
+    res.render("pages/admin/productDetail", {
+        product: product,
+        page: "product",
+    });
 };
 exports.postedit = async (req, res, next) => {
     console.log(req.params.id);
@@ -32,6 +35,8 @@ exports.postedit = async (req, res, next) => {
     product.imgSrc = req.body.imgSrc;
     product.type = req.body.type;
     product.more = req.body.more;
+    product.description = req.body.description;
+    product.formula = req.body.formula;
     product
         .save()
         .then(res.json({ log: "success" }))

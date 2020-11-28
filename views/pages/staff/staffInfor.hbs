@@ -1,0 +1,24 @@
+{{>navbar}}
+<div id="wrapper">
+    {{>sidebarStaff}}
+    <div class="container-fluid">
+        <h1>Staff Detail</h1>
+        <h3>Username: {{user.username}}</h3>
+        <h3>Password: {{user.password}}</h3>
+        <h3>Full Name: {{user.name}}</h3>
+        <h3>Address: {{user.address}}</h3>
+        <h3>Phone Number: {{user.phoneNumber}}</h3>
+        <h3>Birthday: {{user.birthday}}</h3>
+        <h3>Start Date: {{user.startDate}}</h3>
+        <h3>Role: {{user.role}}</h3>
+        <h3>Salary: {{user.salary}}</h3>
+        <a class="btn btn-primary" href="/info/edit">Update profile</a>
+    </div>
+</div>
+
+
+{{>logout}}
+{{>scrolltotop}}
+{{#extend "script"}}
+<script src="/js/staffDetail-form.js"></script>
+{{/extend}}

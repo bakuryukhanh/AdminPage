@@ -1,10 +1,11 @@
 const express = require("express");
+const { authUser, authAdmin } = require("../authorize/authUser");
 const router = express.Router();
 const ProductController = require("../controllers/ProductController");
-router.get("/", ProductController.index);
-router.get("/add", ProductController.getAddProduct);
-router.post("/add", ProductController.addProduct);
-router.get("/edit/:id", ProductController.getedit);
-router.post("/edit/:id", ProductController.postedit);
-router.post("/remove/:id", ProductController.remove);
+router.get("/", authUser, authAdmin, ProductController.index);
+router.get("/add", authUser, authAdmin, ProductController.getAddProduct);
+router.post("/add", authUser, authAdmin, ProductController.addProduct);
+router.get("/edit/:id", authUser, authAdmin, ProductController.getedit);
+router.post("/edit/:id", authUser, authAdmin, ProductController.postedit);
+router.post("/remove/:id", authUser, authAdmin, ProductController.remove);
 module.exports = router;

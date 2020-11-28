@@ -9,10 +9,10 @@ exports.index = async (req, res, next) => {
         });
         return staffs;
     });
-    res.render("staffs", { staff: staffs });
+    res.render("pages/admin/staffs", { staff: staffs, page: "staff" });
 };
 exports.getAdd = async (req, res, next) => {
-    res.render("staffDetail");
+    res.render("pages/admin/staffDetail", { page: "staff" });
 };
 exports.postAdd = async (req, res, next) => {
     const staff = await StaffModel(req.body);
@@ -24,7 +24,7 @@ exports.postAdd = async (req, res, next) => {
 };
 exports.getEdit = async (req, res, next) => {
     const staff = await StaffModel.findOne({ _id: ObjectID(req.params.id) });
-    res.render("staffDetail", { staff: staff });
+    res.render("pages/admin/staffDetail", { staff: staff, page: "staff" });
 };
 exports.postEdit = async (req, res, next) => {
     console.log(req.params.id);
@@ -46,7 +46,7 @@ exports.postEdit = async (req, res, next) => {
         .save()
         .then(res.json({ log: "success" }))
 
-        .catch((err) => console.error(err));
+        .catch((err) => res.json(err));
 };
 exports.remove = async (req, res, next) => {
     const staff = await StaffModel.deleteOne({

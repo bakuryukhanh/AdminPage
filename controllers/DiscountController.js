@@ -3,10 +3,13 @@ const { ObjectID } = require("mongodb");
 
 exports.index = async (req, res, next) => {
     const discounts = await DiscountModel.find({});
-    await res.render("discount", { discounts: discounts });
+    await res.render("pages/admin/discount", {
+        discounts: discounts,
+        page: "discount",
+    });
 };
 exports.getAdd = async (req, res, next) => {
-    res.render("discountDetail");
+    res.render("pages/admin/discountDetail", { page: "discount" });
 };
 exports.postAdd = async (req, res, next) => {
     const discount = await DiscountModel(req.body);
@@ -20,7 +23,10 @@ exports.getEdit = async (req, res, next) => {
     const discount = await DiscountModel.findOne({
         _id: ObjectID(req.params.id),
     });
-    res.render("discountDetail", { discount: discount });
+    res.render("pages/admin/discountDetail", {
+        discount: discount,
+        page: "discount",
+    });
 };
 exports.postEdit = async (req, res, next) => {
     console.log(req.params.id);

@@ -10,6 +10,8 @@ const ChartsRoute = require("./routes/charts");
 const StaffRoute = require("./routes/staff");
 const DiscountRoute = require("./routes/discount");
 const ProductRoute = require("./routes/product");
+const StaffInforRoute = require("./routes/staffInfor");
+const { authUser } = require("./authorize/authUser");
 const app = express();
 
 app.set("views", path.join(__dirname, "views"));
@@ -36,6 +38,22 @@ hbs.registerHelper("checked", function (value1, value2) {
     if (value1 == value2) return "checked";
     return "";
 });
+hbs.registerHelper("active", function (value1, value2) {
+    if (value1 == null) {
+        console.log("null");
+        return "";
+    }
+    if (value1 == value2) return "active";
+    return "";
+});
+app.use(
+    session({
+        resave: true,
+        saveUninitialized: true,
+        secret: "somesecret",
+        cookie: { maxAge: 600000 },
+    })
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -49,4 +67,5 @@ app.use("/staff", StaffRoute);
 app.use("/register", RegisterRoute);
 app.use("/discount", DiscountRoute);
 app.use("/product", ProductRoute);
+app.use("/info", StaffInforRoute);
 module.exports = app;

@@ -1,4 +1,4 @@
-$("#product-detail-form")
+$("#login-form")
     .validator()
     .on("submit", function (event) {
         if (event.isDefaultPrevented()) {
@@ -6,7 +6,6 @@ $("#product-detail-form")
             formError();
             submitMSG(false, "Did you fill in the form properly?");
         } else {
-            // everything looks good!
             event.preventDefault();
             submitForm();
         }
@@ -14,20 +13,14 @@ $("#product-detail-form")
 
 function submitForm() {
     // Initiate Variables With Form Content
-    var name = $("#name").val();
-    var price = $("#price").val();
-    var imgSrc = $("#imgSrc").val();
-    var type = $("[name='type']:checked").val();
-    var more = $("[name='more']:checked").val();
-    var description = $("#description").val();
-    var formula = $("#formula").val();
+    var username = $("#username").val();
+    var password = $("#password").val();
+    const user = { username, password };
+    console.log(user);
 
-    var data = { name, price, imgSrc, type, more, description, formula };
-    console.log(data);
-    //Submit form
-    fetch("", {
+    fetch("/login", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(user),
         headers: {
             "content-type": "application/json",
         },
@@ -54,18 +47,20 @@ function submitForm() {
 
         </div>
       </div>`;
+            } else {
+                window.location.href = res.dest;
             }
         })
         .then(() => $("#myModal").modal("show"));
 }
 
 function formSuccess() {
-    $("#product-detail-form")[0].reset();
+    $("#staff-form")[0].reset();
     submitMSG(true, "Message Submitted!");
 }
 
 function formError() {
-    $("#product-detail-form")
+    $("#staff-form")
         .removeClass()
         .addClass("shake animated")
         .one(
