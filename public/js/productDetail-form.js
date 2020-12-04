@@ -31,19 +31,19 @@ function submitForm() {
     formdata.append("description", description);
     formdata.append("formula", formula);
     console.log(formdata);
-    var dialog = $("#dialog")[0];
-    dialog.innerHTML = `<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <div class="loader"></div>
-        <div clas="loader-txt">
-          <p>Updating Product</p>
+    var loader = $("#loader")[0];
+    loader.innerHTML = `<div class="modal fade" id="loadMe" role="dialog">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-body text-center">
+            <div class="loader"></div>
+            <div clas="loader-txt">
+              <p>Updating Product</p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>`;
+    </div>`;
     $("#loadMe").modal({
         backdrop: "static", //remove ability to close modal with click
         keyboard: false, //remove option to close with keyboard
@@ -58,6 +58,7 @@ function submitForm() {
         .then((res) => res.json())
         .then((res) => {
             if (res.log == "success") {
+                $("#loadMe").modal("hide");
                 var dialog = $("#dialog")[0];
                 dialog.innerHTML = `<div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
