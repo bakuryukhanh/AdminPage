@@ -1,0 +1,83 @@
+{{> navbar}}
+<div id="wrapper">
+    {{>sidebarStaff}}
+    <div id="content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Tables</li>
+            </ol>
+
+            <!-- DataTables Example -->
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fas fa-table"></i>
+                    Data Table Example
+
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div class="filter-container">
+                            <button class="btn btn-primary" id="all-filter">All</button>
+                            <button class="btn btn-primary" id="order-filter">Ordering</button>
+                            <button class="btn btn-primary" id="shipping-filter">Shipping</button>
+                            <button class="btn btn-primary" id="shipped-filter">Shipped</button>
+                        </div>
+                        <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="1">
+                            <thead>
+                                <tr>
+                                    <th>Customer Name</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>State</th>
+                                    <th>Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each bills}}
+                                <tr>
+                                    <td class="name">{{customerName}}</td>
+                                    <td class="price">{{date}}</td>
+                                    <td class="type">{{total}}</td>
+                                    <td class="more">{{state}}</td>
+                                    <td style="text-align: center">
+                                        <a href="/drink-order/detail/{{_id}}" name="detail">
+                                            View Detail
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+                <div class="card-footer small text-muted">
+                    Updated yesterday at 11:59 PM
+                </div>
+            </div>
+
+            <p class="small text-center text-muted my-5">
+                <em>More table examples coming soon...</em>
+            </p>
+        </div>
+        <!-- /.container-fluid -->
+        <div id="dialog"></div>
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Your Website 2018</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+{{>logout}}
+{{#extend "script"}}
+<script src="/js/bill-filter.js"></script>
+{{/extend}}

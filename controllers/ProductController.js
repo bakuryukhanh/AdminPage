@@ -1,8 +1,9 @@
-const { ProductModel } = require("../models/productModel");
+const formidable = require("formidable");
+const fs = require("fs");
+const ProductServices = require("../models/services/ProductServices");
 
-const { ObjectID } = require("mongodb");
 exports.index = async (req, res, next) => {
-    const products = await ProductModel.find({});
+    const products = await ProductServices.getProductList();
     res.render("pages/admin/product", { products: products, page: "product" });
 };
 exports.getAddProduct = (req, res, next) => {
@@ -10,43 +11,38 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.addProduct = async (req, res, next) => {
-    const product = await new ProductModel(req.body);
-    await product.save().catch((err) => console.error(err));
+    await ProductServices.addProduct(req.body);
     res.json({ log: "success" });
 };
 
 exports.getedit = async (req, res, next) => {
-    console.log(req.params.id);
-    const product = await ProductModel.findOne({
-        _id: ObjectID(req.params.id),
-    });
+    const product = await ProductServices.getProductByID(req.params.id);
     res.render("pages/admin/productDetail", {
         product: product,
         page: "product",
     });
 };
 exports.postedit = async (req, res, next) => {
-    console.log(req.params.id);
-    const product = await ProductModel.findOne({
-        _id: ObjectID(req.params.id),
+    const form = formidable({ multiples: true });
+    form.parse(req, (err, fields, files) => {
+        if (err) {
+            next(err);
+            return;
+        }
+        console.log(files);
+        imgSrc = files.imgSrc;
+        if (imgSrc && imgSrc.size > 0) {
+            fs.renameSync(
+                imgSrc.path,
+                __dirname + "/productImg/" + imgSrc.name
+            );
+        }
     });
-    product.name = req.body.name;
-    product.price = req.body.price;
-    product.imgSrc = req.body.imgSrc;
-    product.type = req.body.type;
-    product.more = req.body.more;
-    product.description = req.body.description;
-    product.formula = req.body.formula;
-    product
-        .save()
-        .then(res.json({ log: "success" }))
 
-        .catch((err) => console.error(err));
+    // await ProductServices.updateProduct(req.params.id, req.body);
+    res.json({ log: "success" });
 };
 exports.remove = async (req, res, next) => {
-    const product = await ProductModel.deleteOne({
-        _id: ObjectID(req.params.id),
-    }).catch((err) => console.error(err));
-
+    await ProductServices.deleteProduct(req.params.id);
     res.json({ log: "success" });
 };

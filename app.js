@@ -6,11 +6,12 @@ const hbs = require("hbs");
 const HomeRoute = require("./routes/home");
 const LoginRoute = require("./routes/login");
 const RegisterRoute = require("./routes/register");
-const ChartsRoute = require("./routes/charts");
 const StaffRoute = require("./routes/staff");
 const DiscountRoute = require("./routes/discount");
 const ProductRoute = require("./routes/product");
 const StaffInforRoute = require("./routes/staffInfor");
+const formulaRoute = require("./routes/formula");
+const drinkOrder = require("./routes/drinkOrder");
 const { authUser } = require("./authorize/authUser");
 const app = express();
 
@@ -40,7 +41,6 @@ hbs.registerHelper("checked", function (value1, value2) {
 });
 hbs.registerHelper("active", function (value1, value2) {
     if (value1 == null) {
-        console.log("null");
         return "";
     }
     if (value1 == value2) return "active";
@@ -62,10 +62,11 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", HomeRoute);
 app.use("/login", LoginRoute);
-app.use("/charts", ChartsRoute);
 app.use("/staff", StaffRoute);
 app.use("/register", RegisterRoute);
 app.use("/discount", DiscountRoute);
 app.use("/product", ProductRoute);
 app.use("/info", StaffInforRoute);
+app.use("/formula", formulaRoute);
+app.use("/drink-order", drinkOrder);
 module.exports = app;

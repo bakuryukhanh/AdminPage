@@ -16,7 +16,7 @@
             </div>
             <div class="form-group">
                 <label for="imgSrc" class="control-label">Image Source</label>
-                <input type="url" class="form-control" id="imgSrc" value="{{product.imgSrc}}" required>
+                <input type="file" class="form-control" id="imgSrc" value="{{product.imgSrc}}" required>
                 <div class=" help-block with-errors"></div>
             </div>
             <div class="form-group">
@@ -58,13 +58,13 @@
             <div class="form-group">
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#description"
                     aria-expanded="false" aria-controls="description">description</button>
-                <textarea class="collapse" rows=20 id="description"
+                <textarea class="collapse" rows=5 id="description"
                     style="width: 100%;">{{product.description}}</textarea>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formula"
                     aria-expanded="false" aria-controls="formula">Formula</button>
-                <textarea class="collapse" rows=20 id="formula" style="width: 100%;" ">{{product.formula}}</textarea>
+                <textarea class="collapse" rows=5 id="formula" style="width: 100%;">{{product.formula}}</textarea>
             </div>
             <div class=" form-group">
                 <button type="submit" class="btn btn-primary">Submit</button>

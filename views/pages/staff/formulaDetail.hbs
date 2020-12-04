@@ -1,0 +1,21 @@
+{{>navbar}}
+<div id="wrapper">
+    {{>sidebarStaff}}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 mt-3 mb-3">
+                <div class="card rounded shadow">
+                    <img class="card-img-top" src="{{product.imgSrc}}" style="object-fit:cover" alt="Card image cap">
+                </div>
+            </div>
+            <div class="col-md-6 mt-3 mb-3">
+                <h2>{{product.name}}</h2>
+                <p>{{product.description}}</p>
+                <textarea id="formula" cols="30" rows="10" class="h5 border-0" readonly
+                    disabled>{{product.formula}} </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+{{>logout}}
+{{>scrolltotop}}

@@ -16,8 +16,6 @@ function submitForm() {
     var username = $("#username").val();
     var password = $("#password").val();
     const user = { username, password };
-    console.log(user);
-
     fetch("/login", {
         method: "POST",
         body: JSON.stringify(user),
@@ -27,7 +25,9 @@ function submitForm() {
     })
         .then((res) => res.json())
         .then((res) => {
-            if (res.log == "success") {
+            if (!res.log) {
+                window.location.href = res.dest;
+            } else {
                 var dialog = $("#dialog")[0];
                 dialog.innerHTML = `<div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -38,7 +38,7 @@ function submitForm() {
               <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <p>Update success</p>
+              <p>UUsername or Password wrong</p>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -47,8 +47,6 @@ function submitForm() {
 
         </div>
       </div>`;
-            } else {
-                window.location.href = res.dest;
             }
         })
         .then(() => $("#myModal").modal("show"));

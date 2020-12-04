@@ -16,21 +16,24 @@ function submitForm() {
     // Initiate Variables With Form Content
     var name = $("#name").val();
     var price = $("#price").val();
-    var imgSrc = $("#imgSrc").val();
+    var imgSrc = $("#imgSrc")[0].files[0];
     var type = $("[name='type']:checked").val();
     var more = $("[name='more']:checked").val();
     var description = $("#description").val();
     var formula = $("#formula").val();
-
-    var data = { name, price, imgSrc, type, more, description, formula };
-    console.log(data);
+    var formdata = new FormData();
+    formdata.append("name", name);
+    formdata.append("price", price);
+    formdata.append("imgSrc", imgSrc);
+    formdata.append("type", type);
+    formdata.append("more", more);
+    formdata.append("description", description);
+    formdata.append("formula", formula);
+    console.log(formdata);
     //Submit form
     fetch("", {
         method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "content-type": "application/json",
-        },
+        body: formdata,
     })
         .then((res) => res.json())
         .then((res) => {

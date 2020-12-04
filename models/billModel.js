@@ -4,7 +4,11 @@ const billSchema = new mongoose.Schema({
     customerAddress: String,
     customerPhone: String,
     customerEmail: String,
+    date: String,
     productList: Array,
+    discountCode: String,
+    shipping: Number,
+    total: Number,
     state: String,
 });
 

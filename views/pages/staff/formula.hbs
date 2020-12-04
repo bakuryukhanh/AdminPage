@@ -1,0 +1,22 @@
+{{>navbar}}
+<div id="wrapper">
+    {{>sidebarStaff}}
+    <div class="container-fluid">
+        <div class="row">
+            {{#each products}}
+            <div class="col-lg-4 col-md-6 mt-3 mb-3">
+                <div class="card rounded shadow">
+                    <img class="card-img-top" src="{{imgSrc}}" style="max-height: 400px;object-fit:cover"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{name}}</h5>
+                        <a href="/formula/view/{{id}}" class="btn btn-primary btn-block m-x-auto">View Formula</a>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{>logout}}
+{{>scrolltotop}}
