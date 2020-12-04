@@ -12,6 +12,7 @@ $("#product-detail-form")
         }
     });
 
+function Loading() {}
 function submitForm() {
     // Initiate Variables With Form Content
     var name = $("#name").val();
@@ -30,6 +31,25 @@ function submitForm() {
     formdata.append("description", description);
     formdata.append("formula", formula);
     console.log(formdata);
+    var dialog = $("#dialog")[0];
+    dialog.innerHTML = `<div class="modal fade" id="loadMe" tabindex="-1" role="dialog" aria-labelledby="loadMeLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <div class="loader"></div>
+        <div clas="loader-txt">
+          <p>Updating Product</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`;
+    $("#loadMe").modal({
+        backdrop: "static", //remove ability to close modal with click
+        keyboard: false, //remove option to close with keyboard
+        show: true, //Display loader!
+    });
+
     //Submit form
     fetch("", {
         method: "POST",

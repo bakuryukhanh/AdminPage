@@ -1,6 +1,7 @@
 const formidable = require("formidable");
 const fs = require("fs");
 const ProductServices = require("../models/services/ProductServices");
+const { uploadImg } = require("../models/services/uploadImgService");
 
 exports.index = async (req, res, next) => {
     const products = await ProductServices.getProductList();
@@ -24,23 +25,18 @@ exports.getedit = async (req, res, next) => {
 };
 exports.postedit = async (req, res, next) => {
     const form = formidable({ multiples: true });
-    form.parse(req, (err, fields, files) => {
+    var product;
+    await form.parse(req, async (err, fields, files) => {
         if (err) {
             next(err);
             return;
         }
-        console.log(files);
-        imgSrc = files.imgSrc;
-        if (imgSrc && imgSrc.size > 0) {
-            fs.renameSync(
-                imgSrc.path,
-                __dirname + "/productImg/" + imgSrc.name
-            );
-        }
-    });
 
-    // await ProductServices.updateProduct(req.params.id, req.body);
-    res.json({ log: "success" });
+        await uploadImg(files.imgSrc.path).then((url) => (fields.imgSrc = url));
+        product = fields;
+        await ProductServices.updateProduct(req.params.id, product);
+        res.json({ log: "success" });
+    });
 };
 exports.remove = async (req, res, next) => {
     await ProductServices.deleteProduct(req.params.id);
