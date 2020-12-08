@@ -11,7 +11,7 @@
             </div>
             <div class="form-group">
                 <label for="price" class="control-label">Price</label>
-                <input type="number" step=0.001 class="form-control" id="price" value={{product.price}} required>
+                <input type="number" step=500 class="form-control" id="price" value={{product.price}} required>
                 <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="preview-image img-responsive col-sm-6">
                         <p class="h4">After</p>
-                        <img id="image-preview" src="#" alt="image After" class="hidden" />
+                        <img id="image-preview" src="#" alt="After" class="hidden" />
                     </div>
                 </div>
                 <hr>
@@ -85,7 +85,20 @@
             </div>
         </form>
         <div id="dialog"></div>
-        <div id="loader"></div>
+
+        <div class="modal fade" id="loadMe" role="dialog">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-body text-center">
+                        <div class="loader"></div>
+                        <div clas="loader-txt">
+                            <p>Updating Product</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="msgSubmit"></div>
     </div>
 </div>

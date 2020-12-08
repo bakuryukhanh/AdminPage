@@ -12,7 +12,6 @@ $("#product-detail-form")
         }
     });
 
-function Loading() {}
 function submitForm() {
     // Initiate Variables With Form Content
     var name = $("#name").val();
@@ -25,28 +24,14 @@ function submitForm() {
     var formdata = new FormData();
     formdata.append("name", name);
     formdata.append("price", price);
-    formdata.append("imgSrc", imgSrc);
+    imgSrc ? formdata.append("imgSrc", imgSrc) : 0;
     formdata.append("type", type);
     formdata.append("more", more);
     formdata.append("description", description);
     formdata.append("formula", formula);
     console.log(formdata);
-    var loader = $("#loader")[0];
-    loader.innerHTML = `<div class="modal fade" id="loadMe" role="dialog">
-      <div class="modal-dialog modal-sm" role="document">
-        <div class="modal-content">
-          <div class="modal-body text-center">
-            <div class="loader"></div>
-            <div clas="loader-txt">
-              <p>Updating Product</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>`;
     $("#loadMe").modal({
-        backdrop: "static", //remove ability to close modal with click
-        keyboard: false, //remove option to close with keyboard
+        //remove option to close with keyboard
         show: true, //Display loader!
     });
 
@@ -58,7 +43,6 @@ function submitForm() {
         .then((res) => res.json())
         .then((res) => {
             if (res.log == "success") {
-                $("#loadMe").modal("hide");
                 var dialog = $("#dialog")[0];
                 dialog.innerHTML = `<div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -72,15 +56,21 @@ function submitForm() {
               <p>Update success</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" id="refresh"class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
 
         </div>
       </div>`;
+                $("#loadMe").modal("toggle");
+
+                const refresh = document.getElementById("refresh");
+                refresh.addEventListener("click", () => {
+                    window.location.href = "/product";
+                });
             }
-        })
-        .then(() => $("#myModal").modal("show"));
+            $("#myModal").modal("show");
+        });
 }
 
 function formSuccess() {

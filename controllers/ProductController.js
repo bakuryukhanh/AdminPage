@@ -19,7 +19,14 @@ exports.addProduct = async (req, res, next) => {
             return;
         }
 
-        await uploadImg(files.imgSrc.path).then((url) => (fields.imgSrc = url));
+        if (files.imgSrc && files.imgSrc.size > 0) {
+            await uploadImg(files.imgSrc.path).then(
+                (url) => (fields.imgSrc = url)
+            );
+        } else {
+            fields.imgSrc =
+                "https://lallahoriye.com.tirzee.com/wp-content/uploads/2019/04/Product_Lg_Type.jpg";
+        }
         product = fields;
         await ProductServices.addProduct(product);
         res.json({ log: "success" });
@@ -27,6 +34,7 @@ exports.addProduct = async (req, res, next) => {
 };
 
 exports.getedit = async (req, res, next) => {
+    console.log(req.params.id);
     const product = await ProductServices.getProductByID(req.params.id);
     res.render("pages/admin/productDetail", {
         product: product,
@@ -41,9 +49,13 @@ exports.postedit = async (req, res, next) => {
             next(err);
             return;
         }
-
-        await uploadImg(files.imgSrc.path).then((url) => (fields.imgSrc = url));
+        if (files.imgSrc && files.imgSrc.size > 0) {
+            await uploadImg(files.imgSrc.path).then(
+                (url) => (fields.imgSrc = url)
+            );
+        }
         product = fields;
+        console.log(product);
         await ProductServices.updateProduct(req.params.id, product);
         res.json({ log: "success" });
     });

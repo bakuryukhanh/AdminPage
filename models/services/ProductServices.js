@@ -1,6 +1,5 @@
 const { ProductModel } = require("../productModel");
-const { ObjectId } = require("mongodb");
-const paginate = require("mongoose-paginate-v2");
+const { mongoose } = require("../mongoose");
 const getProductList = async () => {
     const list = await ProductModel.find();
     return list;
@@ -8,17 +7,23 @@ const getProductList = async () => {
 
 const updateProduct = async (id, data) => {
     const product = await getProductByID(id);
+    console.log(product);
     product.name = data.name;
     product.price = data.price;
-    product.imgSrc = data.imgSrc;
+    data.imgSrc
+        ? (product.imgSrc = data.imgSrc)
+        : (product.imgSrc = product.imgSrc);
     product.type = data.type;
     product.more = data.more;
     product.description = data.description;
     product.formula = data.formula;
+    console.log(product);
     await product.save();
 };
 const getProductByID = async (id) => {
-    const product = await ProductModel.findOne({ _id: ObjectId(id) });
+    const product = await ProductModel.findOne({
+        _id: mongoose.mongo.ObjectId(id),
+    });
     return product;
 };
 const deleteProduct = async (id) => {
