@@ -51,8 +51,6 @@ exports.index = async (req, res, next) => {
     });
 };
 exports.detail = async (req, res, next) => {
-    const product = await ProductModel.findOne({
-        _id: ObjectID(req.params.id),
-    });
+    const product = await ProductService.getProductByID(req.params.id);
     res.render("pages/staff/formulaDetail", { product: product });
 };
