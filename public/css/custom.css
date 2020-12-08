@@ -84,3 +84,13 @@
     right: 15px;
     top: 18px;
 }
+.preview-image img {
+    /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    width: 250px;
+    max-height: 250px;
+    margin-bottom: 1rem;
+}
+.hidden {
+    display: none;
+}

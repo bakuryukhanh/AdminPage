@@ -16,7 +16,21 @@
             </div>
             <div class="form-group">
                 <label for="imgSrc" class="control-label">Image Source</label>
-                <input type="file" class="form-control" id="imgSrc" value="{{product.imgSrc}}" required>
+                <input type="file" class="form-control" id="imgSrc" value="{{product.imgSrc}}">
+                <div class="row mt-3">
+                    <div class="preview-image img-responsive col-sm-6 ">
+
+                        <p class="h4">Before</p>
+                        <img src="{{product.imgSrc}}" id="before" alt="image Before">
+
+
+                    </div>
+                    <div class="preview-image img-responsive col-sm-6">
+                        <p class="h4">After</p>
+                        <img id="image-preview" src="#" alt="image After" class="hidden" />
+                    </div>
+                </div>
+                <hr>
                 <div class=" help-block with-errors"></div>
             </div>
             <div class="form-group">
@@ -79,4 +93,5 @@
 {{>scrolltotop}}
 {{#extend "script"}}
 <script src="/js/productDetail-form.js"></script>
+<script src="/js/preview-image.js"></script>
 {{/extend}}
