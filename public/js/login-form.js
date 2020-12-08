@@ -47,9 +47,17 @@ function submitForm() {
 
         </div>
       </div>`;
+                $("#login-form").on("keydown", (event) => {
+                    event.keyCode == 13 ? event.preventDefault() : 0;
+                });
             }
         })
-        .then(() => $("#myModal").modal("show"));
+        .then(() =>
+            $("#myModal").modal({
+                keyboard: false,
+                show: true,
+            })
+        );
 }
 
 function formSuccess() {

@@ -1,0 +1,86 @@
+.search-product {
+    position: relative;
+}
+.search-product input[type="text"] {
+    background: #333333;
+    border: 0;
+    box-shadow: none;
+    border-radius: 0;
+    color: #ffffff;
+    height: 55px;
+    font-weight: 300;
+    font-size: 16px;
+    margin-bottom: 15px;
+    padding: 0 20px;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    width: 100%;
+    outline: 0;
+}
+.search-product .form-control::-moz-placeholder {
+    color: #ffffff;
+    opacity: 1;
+}
+.search-product button {
+    background: #000000;
+    color: #ffffff;
+    font-size: 18px;
+    position: absolute;
+    right: 0px;
+    padding: 12px 15px;
+    top: 0;
+    line-height: 27px;
+    border: none;
+    cursor: pointer;
+    height: 100%;
+}
+.search-product button:hover {
+    background: #ea8025;
+}
+.product-item-filter .toolbar-sorter-right span {
+    line-height: 42px;
+    padding-right: 15px;
+    float: left;
+}
+.product-item-filter .toolbar-sorter-right {
+    width: 65%;
+}
+.toolbar-sorter-right {
+    float: left;
+}
+.toolbar-sorter-right .bootstrap-select.form-control:not([class*="col-"]) {
+    width: 77%;
+    float: right;
+}
+.toolbar-sorter-right .bootstrap-select.btn-group > .dropdown-toggle {
+    padding: 0px;
+    border-radius: 0px;
+    border: none;
+}
+.toolbar-sorter-right
+    .bootstrap-select.btn-group
+    .dropdown-toggle
+    .filter-option {
+    padding-left: 15px;
+}
+.toolbar-sorter-right .btn-light {
+    background: #000000;
+    color: #ffffff;
+}
+.toolbar-sorter-right .btn-light:hover {
+    background: #ea8025;
+    border-radius: 0px;
+    border: none;
+}
+.toolbar-sorter-right .show > .btn-light.dropdown-toggle {
+    background-color: #ea8025;
+}
+.toolbar-sorter-right .bootstrap-select .dropdown-toggle:focus {
+    background: #ea8025;
+}
+.toolbar-sorter-right .dropup .dropdown-toggle::after {
+    position: absolute;
+    right: 15px;
+    top: 18px;
+}

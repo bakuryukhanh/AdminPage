@@ -1,6 +1,6 @@
 const { ProductModel } = require("../productModel");
 const { ObjectId } = require("mongodb");
-
+const paginate = require("mongoose-paginate-v2");
 const getProductList = async () => {
     const list = await ProductModel.find();
     return list;
@@ -26,13 +26,27 @@ const deleteProduct = async (id) => {
     product.remove();
 };
 const addProduct = async (data) => {
-    const newProduct = ProductModel(data);
+    const newProduct = new ProductModel(data);
     await newProduct.save();
 };
+const listPageProduct = async (page, itemPerPage, sort = {}, filter = {}) => {
+    const options = {
+        page: page,
+        limit: itemPerPage,
+        sort: sort,
+    };
+    console.log(filter);
+    var products = await ProductModel.paginate(filter, options).catch((err) =>
+        console.log(err)
+    );
+    return products;
+};
+
 module.exports = {
     getProductList,
     getProductByID,
     updateProduct,
     deleteProduct,
     addProduct,
+    listPageProduct,
 };

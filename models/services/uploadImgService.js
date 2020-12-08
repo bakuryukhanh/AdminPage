@@ -6,7 +6,7 @@ const uploadImg = async (path) => {
     formdata.append("image", fs.createReadStream(path));
     formdata.append("key", "b9531146d5edb5db74a3e26f881c47e8");
     var url = "";
-    await fetch("https://api.imgbb.com/1/upload", {
+    await fetch(process.env.IMAGE_SERVER_URL, {
         method: "POST",
         body: formdata,
     })

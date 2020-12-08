@@ -1,5 +1,4 @@
 const formidable = require("formidable");
-const fs = require("fs");
 const ProductServices = require("../models/services/ProductServices");
 const { uploadImg } = require("../models/services/uploadImgService");
 
@@ -12,8 +11,19 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.addProduct = async (req, res, next) => {
-    await ProductServices.addProduct(req.body);
-    res.json({ log: "success" });
+    const form = formidable({ multiples: true });
+    var product;
+    await form.parse(req, async (err, fields, files) => {
+        if (err) {
+            next(err);
+            return;
+        }
+
+        await uploadImg(files.imgSrc.path).then((url) => (fields.imgSrc = url));
+        product = fields;
+        await ProductServices.addProduct(product);
+        res.json({ log: "success" });
+    });
 };
 
 exports.getedit = async (req, res, next) => {

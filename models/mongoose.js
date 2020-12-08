@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const server =
-    "mongodb+srv://bakuryukhanh:khanhkhanh1@cluster0.mpgum.mongodb.net/CoffeeShop?retryWrites=true&w=majority";
+const server = process.env.DB_URL;
+console.log(server);
 const option = { useNewUrlParser: true, useUnifiedTopology: true };
 mongoose
     .connect(server, option)

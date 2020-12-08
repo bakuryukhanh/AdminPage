@@ -12,7 +12,6 @@ const ProductRoute = require("./routes/product");
 const StaffInforRoute = require("./routes/staffInfor");
 const formulaRoute = require("./routes/formula");
 const drinkOrder = require("./routes/drinkOrder");
-const { authUser } = require("./authorize/authUser");
 const app = express();
 
 app.set("views", path.join(__dirname, "views"));
@@ -45,6 +44,21 @@ hbs.registerHelper("active", function (value1, value2) {
     }
     if (value1 == value2) return "active";
     return "";
+});
+hbs.registerHelper("sortType", function (value, test) {
+    if (value == undefined) return "";
+    return value == test ? "selected " : "";
+});
+hbs.registerHelper("paginate", function (totalPages, currentPage) {
+    var string = ``;
+    for (let i = 1; i <= totalPages; i++) {
+        if (i == currentPage) {
+            string += `<li class="page-item active"><button class="page-link" value=${i}>${i}</button></li>`;
+        } else {
+            string += `<li class="page-item"><button class="page-link" value=${i}>${i}</button></li>`;
+        }
+    }
+    return string;
 });
 app.use(
     session({

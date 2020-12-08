@@ -1,9 +1,54 @@
-const { ProductModel } = require("../models/productModel");
-const { ObjectID } = require("mongodb");
-
+const ProductService = require("../models/services/ProductServices");
+function getsortType(index) {
+    var sort = 0;
+    switch (index) {
+        case "0":
+            sort = {};
+            break;
+        case "1":
+            sort = { name: 1 };
+            break;
+        case "2":
+            sort = { price: -1 };
+            break;
+        case "3":
+            sort = { price: 1 };
+            break;
+    }
+    return sort;
+}
 exports.index = async (req, res, next) => {
-    const products = await ProductModel.find();
-    res.render("pages/staff/formula", { products: products });
+    var page = +req.query.page || 1;
+    var sortIndex = req.query.sort || 0;
+    var minPrice = +req.query.minPrice || 0;
+    var maxPrice = +req.query.maxPrice || 100000;
+    var Filter = {};
+    console.log(req.query.keyword);
+    var re = new RegExp("." + req.query.keyword, "i");
+    req.query.keyword ? (Filter.name = { $regex: re }) : 0;
+    Filter.price = { $gte: minPrice, $lte: maxPrice };
+    const products = await ProductService.listPageProduct(
+        page,
+        process.env.ITEM_PER_PAGE,
+        getsortType(sortIndex),
+        Filter
+    );
+    res.render("pages/staff/formula", {
+        page: "shop",
+        products: products.docs,
+        cart: sess.Cart,
+        login: sess.Login,
+        sortType: sortIndex,
+        minPrice: minPrice,
+        maxPrice: maxPrice,
+        currentPage: products.page,
+        nextPage: products.nextPage,
+        prevPage: products.prevPage,
+        hasNextPage: products.hasNextPage,
+        hasPrevPage: products.hasPrevPage,
+        totalPages: products.totalPages,
+        totalProducts: products.totalDocs,
+    });
 };
 exports.detail = async (req, res, next) => {
     const product = await ProductModel.findOne({

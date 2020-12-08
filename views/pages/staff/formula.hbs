@@ -1,7 +1,17 @@
 {{>navbar}}
 <div id="wrapper">
     {{>sidebarStaff}}
+
     <div class="container-fluid">
+        <h1 style="text-align: center;">Product Formular</h1>
+
+        <div class="search-product align-middle row">
+            <p class="h3">Search Product:</p>
+            <form class="col-sm-4">
+                <input class="form-control" id="search-value" placeholder="Search here..." type="text">
+                <button type="submit" style="height: 55px" id="search-btn"> <i class="fa fa-search"></i> </button>
+            </form>
+        </div>
         <div class="row">
             {{#each products}}
             <div class="col-lg-4 col-md-6 mt-3 mb-3">
@@ -16,7 +26,12 @@
             </div>
             {{/each}}
         </div>
+        {{>pagination}}
     </div>
+
 </div>
 {{>logout}}
 {{>scrolltotop}}
+{{#extend "script"}}
+<script src="/js/paginate-query.js"></script>
+{{/extend}}
