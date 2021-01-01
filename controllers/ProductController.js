@@ -3,14 +3,38 @@ const ProductServices = require("../models/services/ProductServices");
 const { uploadImg } = require("../models/services/uploadImgService");
 
 exports.index = async (req, res, next) => {
+    if (!req.user) {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
+    if (req.user.role != "manager") {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
     const products = await ProductServices.getProductList();
     res.render("pages/admin/product", { products: products, page: "product" });
 };
 exports.getAddProduct = (req, res, next) => {
+    if (!req.user) {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
+    if (req.user.role != "manager") {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
     res.render("pages/admin/productDetail");
 };
 
 exports.addProduct = async (req, res, next) => {
+    if (!req.user) {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
+    if (req.user.role != "manager") {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
     const form = formidable({ multiples: true });
     var product;
     await form.parse(req, async (err, fields, files) => {
@@ -33,7 +57,15 @@ exports.addProduct = async (req, res, next) => {
     });
 };
 
-exports.getedit = async (req, res, next) => {
+exports.getEdit = async (req, res, next) => {
+    if (!req.user) {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
+    if (req.user.role != "manager") {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
     console.log(req.params.id);
     const product = await ProductServices.getProductByID(req.params.id);
     res.render("pages/admin/productDetail", {
@@ -41,7 +73,15 @@ exports.getedit = async (req, res, next) => {
         page: "product",
     });
 };
-exports.postedit = async (req, res, next) => {
+exports.postEdit = async (req, res, next) => {
+    if (!req.user) {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
+    if (req.user.role != "manager") {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
     const form = formidable({ multiples: true });
     var product;
     await form.parse(req, async (err, fields, files) => {
@@ -61,6 +101,14 @@ exports.postedit = async (req, res, next) => {
     });
 };
 exports.remove = async (req, res, next) => {
+    if (!req.user) {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
+    if (req.user.role != "manager") {
+        res.status(401);
+        return res.json({ error: "access denied" });
+    }
     await ProductServices.deleteProduct(req.params.id);
     res.json({ log: "success" });
 };

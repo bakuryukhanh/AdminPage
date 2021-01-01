@@ -3,15 +3,21 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const hbs = require("hbs");
+//routes
 const HomeRoute = require("./routes/home");
 const LoginRoute = require("./routes/login");
-const RegisterRoute = require("./routes/register");
 const StaffRoute = require("./routes/staff");
 const DiscountRoute = require("./routes/discount");
 const ProductRoute = require("./routes/product");
 const StaffInforRoute = require("./routes/staffInfor");
 const formulaRoute = require("./routes/formula");
 const drinkOrder = require("./routes/drinkOrder");
+const FinanceRoute = require("./routes/finance");
+const { passport } = require("./authorize/authUser");
+//API
+const StatisticsAPI = require("./api/StatisticsRecord");
+const StaffAPI = require("./api/StaffAPI");
+
 const app = express();
 
 app.set("views", path.join(__dirname, "views"));
@@ -65,7 +71,7 @@ app.use(
         resave: true,
         saveUninitialized: true,
         secret: "somesecret",
-        cookie: { maxAge: 600000 },
+        cookie: { maxAge: 1000 * 60 * 60 * 24 },
     })
 );
 
@@ -74,13 +80,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(passport.initialize());
+app.use(passport.session());
+//api
+app.use("/api/statistics", StatisticsAPI);
+app.use("/api/staffs", StaffAPI);
+
+//routes
 app.use("/", HomeRoute);
+app.use("/finance", FinanceRoute);
 app.use("/login", LoginRoute);
 app.use("/staff", StaffRoute);
-app.use("/register", RegisterRoute);
 app.use("/discount", DiscountRoute);
 app.use("/product", ProductRoute);
 app.use("/info", StaffInforRoute);
 app.use("/formula", formulaRoute);
 app.use("/drink-order", drinkOrder);
+
 module.exports = app;

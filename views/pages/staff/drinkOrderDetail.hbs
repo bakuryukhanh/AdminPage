@@ -2,19 +2,33 @@
 <div id="wrapper">
     {{>sidebarStaff}}
     <div class="container-fluid">
-        <h1>Staff Detail</h1>
-        <h3>Username: {{bill.customerName}}</h3>
-        <h3>Password: {{bill.customerAddress}}</h3>
-        <h3>Full Name: {{bill.customerPhone}}</h3>
-        <h3>Address: {{bill.customerEmail}}</h3>
-        <h3>Phone Number: {{bill.date}}</h3>
-        {{#each bill.productList}}
-        <h3>{{name}} x {{quantity}} x {{price}}</h3>
-        {{/each}}
-        <h3>Start Date: {{bill.discountCode}}</h3>
-        <h3>Role: {{bill.discountValue}}</h3>
-        <h3>Salary: {{bill.shipping}}</h3>
-        <h3>Salary: {{bill.total}}</h3>
+        <h1>Bill Detail</h1>
+        <h3>Customer name: {{bill.customerName}}</h3>
+        <h3>Ship address: {{bill.customerAddress}}</h3>
+        <h3>Phone number: {{bill.customerPhone}}</h3>
+        <h3>Customer email: {{bill.customerEmail}}</h3>
+        <h3>Order date: {{bill.date}}</h3>
+        <h3>State: {{bill.status}}</h3>
+        <table class="table table-responsive">
+            <tr>
+                <th>Drink</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+            {{#each bill.productList}}
+            <tr>
+                <td>{{name}}</td>
+                <td class="text-center">{{price}}</td>
+                <td class="text-center">{{quantity}}</td>
+                <td class="text-center">0</td>
+            </tr>
+            {{/each}}
+        </table>
+        <h3>Discount code: {{bill.discountCode}}</h3>
+        <h3>Discount value: {{bill.discountValue}}</h3>
+        <h3>Shipping fee: {{bill.shipping}}</h3>
+        <h3>Grand Total: {{bill.total}}</h3>
         <a class="btn btn-primary" href="/info/edit">Update profile</a>
     </div>
 </div>

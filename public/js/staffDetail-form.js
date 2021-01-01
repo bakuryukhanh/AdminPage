@@ -35,9 +35,7 @@ function submitForm() {
         role,
         salary,
     };
-    console.log(staff);
-    // //Submit form
-    fetch("", {
+    fetch("/api/staffs", {
         method: "POST",
         body: JSON.stringify(staff),
         headers: {

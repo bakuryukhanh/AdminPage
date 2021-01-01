@@ -14,11 +14,9 @@ const getStaffById = async (id) => {
 const updateStaff = async (id, data) => {
     const staff = await StaffModel.findOne({ _id: ObjectId(id) });
     if (!staff) {
-        throw TypeError("No staff has ID: ", id);
+        throw Error("No staff has ID: ", id);
     }
     staff.name = data.name;
-    staff.username = data.username;
-    staff.password = data.password;
     staff.phoneNumber = data.phoneNumber;
     staff.address = data.address;
     staff.birthday = data.birthday;
@@ -36,7 +34,6 @@ const addStaff = async (data) => {
     const staff = new StaffModel(data);
     await staff.save();
 };
-
 module.exports = {
     addStaff,
     getStaffById,

@@ -1,8 +1,7 @@
 const express = require("express");
-const { authUser } = require("../authorize/authUser");
 const router = express.Router();
 const staffInforController = require("../controllers/staffInforController");
-router.get("/", authUser, staffInforController.index);
-router.get("/edit", authUser, staffInforController.getUpdateInfor);
-router.post("/edit", authUser, staffInforController.postUpdateInfor);
+router.get("/", staffInforController.index);
+router.get("/edit", staffInforController.getUpdateInfor);
+router.post("/edit", staffInforController.postUpdateInfor);
 module.exports = router;

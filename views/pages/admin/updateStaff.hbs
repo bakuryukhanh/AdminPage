@@ -1,0 +1,78 @@
+{{>navbar}}
+<div id="wrapper">
+    {{>sidebarAdmin}}
+    <div class="container-fluid">
+        <h1>Staff Detail</h1>
+        <form data-toggle="validator" role="form" id="staff-detail-form">
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="name" class="control-label">Name</label>
+                    <input type="text" class="form-control" id="name" value="{{staff.name}}" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <div class="form-group col-12">
+                    <label for="phoneNumber" class="control-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" value="{{staff.phoneNumber}}" required>
+                    <div class=" help-block with-errors"></div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="address" class="control-label">address</label>
+                    <input type="text" class="form-control" id="address" value="{{staff.address}}" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <label for="birthday" class="control-label">Birthday</label>
+                    <input type="text" data-dateValid class="form-control" id="birthday" value="{{staff.birthday}}"
+                        required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                    <label for="startDate" class="control-label">startDate</label>
+                    <input type="text" data-dateValid class="form-control" id="startDate" value="{{staff.startDate}}"
+                        required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-12">
+                    <label for="salary" class="control-label">salary</label>
+                    <input type="number" step=1 class="form-control" id="salary" value="{{staff.salary}}" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+
+                <div class="form-group col-12">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="role" value="barista" {{checked staff.role "barista" }} required>
+                            Barista
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="role" value="cashier" {{checked staff.role "cashier" }} required>
+                            Cashier
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="role" value="manager" {{checked staff.role "manager" }} required>
+                            Manager
+                        </label>
+                    </div>
+                    <div class="help-block with-errors"></div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin:10px auto">Submit</button>
+            </div>
+
+        </form>
+
+        <div id="dialog"></div>
+        <div id="msgSubmit"></div>
+    </div>
+</div>
+{{>logout}}
+{{>scrolltotop}}
+{{#extend "script"}}
+<script src="/js/update-staff.js"></script>
+{{/extend}}

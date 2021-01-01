@@ -1,5 +1,5 @@
 const ProductService = require("../models/services/ProductServices");
-function getsortType(index) {
+function getSortType(index) {
     var sort = 0;
     switch (index) {
         case "0":
@@ -23,21 +23,20 @@ exports.index = async (req, res, next) => {
     var minPrice = +req.query.minPrice || 0;
     var maxPrice = +req.query.maxPrice || 100000;
     var Filter = {};
-    console.log(req.query.keyword);
-    var re = new RegExp("." + req.query.keyword, "i");
+
+    var re = new RegExp(req.query.keyword, "i");
     req.query.keyword ? (Filter.name = { $regex: re }) : 0;
     Filter.price = { $gte: minPrice, $lte: maxPrice };
     const products = await ProductService.listPageProduct(
         page,
         process.env.ITEM_PER_PAGE,
-        getsortType(sortIndex),
+        getSortType(sortIndex),
         Filter
     );
     res.render("pages/staff/formula", {
         page: "shop",
         products: products.docs,
-        cart: sess.Cart,
-        login: sess.Login,
+        login: req.user,
         sortType: sortIndex,
         minPrice: minPrice,
         maxPrice: maxPrice,

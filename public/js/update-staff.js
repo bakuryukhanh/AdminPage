@@ -1,4 +1,4 @@
-$("#staff-update-form")
+$("#staff-detail-form")
     .validator()
     .on("submit", function (event) {
         if (event.isDefaultPrevented()) {
@@ -11,24 +11,30 @@ $("#staff-update-form")
             submitForm();
         }
     });
-
+function getIdFromURL() {
+    return window.location.href.split("/")[5];
+}
 function submitForm() {
     // Initiate Variables With Form Content
     var name = $("#name").val();
+    var role = $("[name='role']:checked").val();
     var address = $("#address").val();
     var phoneNumber = $("#phoneNumber").val();
     var birthday = $("#birthday").val();
+    var startDate = $("#startDate").val();
+    var salary = parseInt($("#salary").val());
 
     var staff = {
         name,
         address,
         phoneNumber,
         birthday,
+        startDate,
+        role,
+        salary,
     };
-    console.log(staff);
-    // //Submit form
-    fetch("", {
-        method: "POST",
+    fetch("/api/staffs/" + getIdFromURL(), {
+        method: "PUT",
         body: JSON.stringify(staff),
         headers: {
             "content-type": "application/json",
@@ -82,12 +88,12 @@ function submitForm() {
 }
 
 function formSuccess() {
-    $("#staff-update-form")[0].reset();
+    $("#staff-detail-form")[0].reset();
     submitMSG(true, "Message Submitted!");
 }
 
 function formError() {
-    $("#staff-update-form")
+    $("#staff-detail-form")
         .removeClass()
         .addClass("shake animated")
         .one(

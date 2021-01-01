@@ -9,7 +9,7 @@ const billSchema = new mongoose.Schema({
     discountCode: String,
     shipping: Number,
     total: Number,
-    state: String,
+    status: String,
 });
 
 let billModel = mongoose.model("bills", billSchema);
