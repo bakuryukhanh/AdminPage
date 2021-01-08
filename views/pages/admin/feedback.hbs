@@ -1,0 +1,25 @@
+{{>navbar}}
+<div id="wrapper">
+    {{>sidebarAdmin}}
+    <div class="container-fluid">
+
+        <div class="card card-outline-secondary my-4" style="width: 100%;">
+            <div class="card-header">
+                <h2>Customer Feedback</h2>
+            </div>
+            <div class="card-body">
+                {{#each feedbacks}}
+
+                <div class="media-body">
+                    <p>Subject: {{subject}}</p>
+                    <p>Message: {{message}}</p>
+                    <small class="text-muted">Posted by {{name}} Email:{{email}}on {{date}}</small>
+                </div>
+                <hr>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
+{{>logout}}
+{{>scrolltotop}}

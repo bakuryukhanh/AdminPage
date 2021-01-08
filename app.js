@@ -13,10 +13,13 @@ const StaffInforRoute = require("./routes/staffInfor");
 const formulaRoute = require("./routes/formula");
 const drinkOrder = require("./routes/drinkOrder");
 const FinanceRoute = require("./routes/finance");
+const FeedBackRoute = require("./routes/feedback");
+const TableBookingRoute = require("./routes/TableBooking");
 const { passport } = require("./authorize/authUser");
 //API
 const StatisticsAPI = require("./api/StatisticsRecord");
 const StaffAPI = require("./api/StaffAPI");
+const TableBookingAPI = require("./api/TableBookingAPI");
 
 const app = express();
 
@@ -85,6 +88,7 @@ app.use(passport.session());
 //api
 app.use("/api/statistics", StatisticsAPI);
 app.use("/api/staffs", StaffAPI);
+app.use("/api/table-booking", TableBookingAPI);
 
 //routes
 app.use("/", HomeRoute);
@@ -96,5 +100,6 @@ app.use("/product", ProductRoute);
 app.use("/info", StaffInforRoute);
 app.use("/formula", formulaRoute);
 app.use("/drink-order", drinkOrder);
-
+app.use("/feedback", FeedBackRoute);
+app.use("/table-booking", TableBookingRoute);
 module.exports = app;
